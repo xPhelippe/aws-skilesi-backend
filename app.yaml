@@ -1,0 +1,19 @@
+runtime: python39
+service: backend
+instance_class: F1
+
+network:
+  forwarded_ports:
+  - 8080/tcp
+
+env_variables:
+  DEBUG: 'False'
+
+default_expiration: "180d"
+
+entrypoint: python3 manage.py runserver 0.0.0.0:8080
+
+handlers:
+- url: /(.*)
+  script: auto
+  secure: always
